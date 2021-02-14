@@ -20,9 +20,9 @@ The server hosting the model is found under the `application`directory. The foll
 
 1. Install requirements (one time)
 
-   - `pip3 install sklearn`
-   - `pip3 install Flask`
-   - `pip3 install joblib`
+   - `pip3 install sklearn` (scikit-learn, for the machine learning)
+   - `pip3 install Flask` (backend to serve the model)
+   - `pip3 install joblib` (save/load model to disk)
 
 2. Start up the server using the `server.sh` shell script
 
