@@ -12,6 +12,8 @@ A project using your personal beer history from Untappd, applying a machine lear
 
 The machine learning model is trained, tested and persisted under the `model` directory. Everything can done using `JupyterLab`.
 
+You can find the example to train a `random forest` classifier int the <a href="https://github.com/tutikka/UntappdML/blob/master/model/untappd.ipynb" target="_blank">untappd.ipynb</a> notebook.
+
 ## Server
 
 The server hosting the model is found under the `application`directory. The following steps can be used to start up the server.
