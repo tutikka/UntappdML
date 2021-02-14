@@ -44,7 +44,7 @@
                     <option value="2">Germany &amp; Austria</option>
                     <option value="3">Finland &amp; Scandinavia</option>
                     <option value="4">Belgium, France &amp; Netherlands</option>
-                    <option value="5">Czech Republic</option>
+                    <option value="5">Czech Republic &amp; Slovakia</option>
                     <option value="6">Other</option>
                 </select>
             </div>
@@ -106,10 +106,10 @@
                     var pred = parseInt(data.pred);
                     if (pred == 0) {
                         var prob = parseFloat(data.prob[0]) * 100.0;
-                        $("#result").html("<div class='alert alert-danger text-center' role='alert'>With " + prob + "% confidence, you <strong>will not</strong> like this beer!</div>");
+                        $("#result").html("<div class='alert alert-danger text-center' role='alert'>With <strong>" + prob + "%</strong> confidence, you <strong>will not like</strong> this beer!</div>");
                     } else {
                         var prob = parseFloat(data.prob[1]) * 100.0;
-                        $("#result").html("<div class='alert alert-success text-center' role='alert'>With " + prob + "% confidence, you <strong>will</strong> like this beer!</div>");
+                        $("#result").html("<div class='alert alert-success text-center' role='alert'>With <strong>" + prob + "%</strong> confidence, you <strong>will like</strong> this beer!</div>");
                     }
                 });                
             }
