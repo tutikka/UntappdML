@@ -12,7 +12,7 @@ A project using your personal beer history from Untappd, applying a machine lear
 
 The machine learning model is trained, tested and persisted under the `model` directory. Everything can done using `JupyterLab`.
 
-You can find the example to train a `random forest` classifier int the <a href="https://github.com/tutikka/UntappdML/blob/master/model/untappd.ipynb" target="_blank">untappd.ipynb</a> notebook.
+You can find the example to train a `random forest` classifier int the <a href="https://github.com/tutikka/UntappdML/blob/master/model/untappd.ipynb">untappd.ipynb</a> notebook.
 
 ## Server
 
@@ -30,9 +30,11 @@ The server hosting the model is found under the `application`directory. The foll
 
 The sample web user interface is used to input new data, and use that against the server to make predictions. On your local machine, you can see the UI using a browser:
 
-<a href="http://localhost:5000" target="_blank">http://localhost:5000</a>
+<a href="http://localhost:5000">http://localhost:5000</a>
 
-If you want to test and expose your local server to the Internet, you can use <a href="https://ngrok.com" targte="_blank">ngrok</a>. While your server is running, run the following command in new terminal:
+![Image](https://github.com/tutikka/UntappdML/blob/master/screenshots/screenshot.png)
+
+If you want to test and expose your local server to the Internet, you can use <a href="https://ngrok.com">ngrok</a>. While your server is running, run the following command in new terminal:
 
 `./ngrok http http://localhost:5000 -host-header="http://localhost:5000"`
 

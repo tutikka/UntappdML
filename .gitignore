@@ -4,3 +4,4 @@ application/__pycache__/
 model/.ipynb_checkpoints/
 application/templates/.ipynb_checkpoints/
 .ipynb_checkpoints/
+.DS_Store
