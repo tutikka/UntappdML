@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <title>UntappdML</title>
+    </head>
+    <body style="margin: 24px;">
+        <div class="container">
+            <h1>UntappdML</h1>
+            <div id="result"></div>
+            <div class="mb-3">
+                <label for="country" class="form-label"><span style="color: red">*</span> Beer Type</label>
+                <select class="form-control" name="type">
+                    <option value="-1"></option>
+                    <option value="0">IPA</option>
+                    <option value="1">Lager / pilsner</option>
+                    <option value="2">Stout</option>
+                    <option value="3">Pale ale</option>
+                    <option value="4">Wheat</option>
+                    <option value="5">Porter</option>
+                    <option value="6">Sour</option>
+                    <option value="7">Fruit</option>
+                    <option value="8">Other</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="abv" class="form-label"><span style="color: red">*</span> Beer ABV</label>
+                <p class="text-muted text-small">Alcohol by volume ( <a href="https://en.wikipedia.org/wiki/Alcohol_by_volume" target="_blank">Info</a> )</p>
+                <input type="number" min="0" max="50" step="0.1" class="form-control" name="abv">
+            </div>
+            <div class="mb-3">
+                <label for="ibu" class="form-label"><span style="color: red">*</span> Beer IBU</label>
+                <p class="text-muted text-small">International bitterness unit ( <a href="https://en.wikipedia.org/wiki/Beer_measurement" target="_blank">Info</a> )</p>
+                <input type="number" min="0" max="100" step="1" class="form-control" name="ibu">
+            </div>
+            <div class="mb-3">
+                <label for="country" class="form-label"><span style="color: red">*</span> Brewery Country</label>
+                <select class="form-control" name="country">
+                    <option value="-1"></option>
+                    <option value="0">North America</option>
+                    <option value="1">Great Britain</option>
+                    <option value="2">Germany &amp; Austria</option>
+                    <option value="3">Finland &amp; Scandinavia</option>
+                    <option value="4">Belgium, France &amp; Netherlands</option>
+                    <option value="5">Czech Republic</option>
+                    <option value="6">Other</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="rating" class="form-label"><span style="color: red">*</span> Global Rating</label>
+                <input type="number" min="0" max="5" step="0.01" class="form-control" name="rating">
+            </div>            
+            <button type="button" class="btn btn-primary float-end" onclick="javascript: submitForm();">Submit</button>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            function submitForm() {
+                var abv = parseFloat($("[name='abv']").val());
+                if (abv <= 4.5) {
+                    abv = 0;
+                } else if (abv <= 5.0) {
+                    abv = 1;
+                } else if (abv <= 5.5) {
+                    abv = 2;
+                } else if (abv <= 6.0) {
+                    abv = 3;
+                } else if (abv <= 7.0) {
+                    abv = 4;
+                } else if (abv <= 8.0) {
+                    abv = 5;
+                } else {
+                    abv = 6;
+                }
+                var ibu = parseInt($("[name='ibu']").val());
+                if (ibu == 0) {
+                    ibu = 0;
+                } else if (ibu <= 20) {
+                    ibu = 1;
+                } else if (ibu <= 30) {
+                    ibu = 2;
+                } else if (ibu <= 40) {
+                    ibu = 3;
+                } else if (ibu <= 60) {
+                    ibu = 4;
+                } else if (ibu <= 80) {
+                    ibu = 5;
+                } else {
+                    ibu = 6;
+                }
+                $.ajax({
+                    type: "post",
+                    url: "/predict",
+                    contentType: "application/json",
+                    dataType: "json",
+                    data: JSON.stringify([{
+                        beer_type: parseInt($("[name='type']").val()),
+                        beer_abv: parseInt(abv),
+                        beer_ibu: parseInt(ibu),
+                        brewery_country: parseInt($("[name='country']").val()),
+                        global_average_rating: parseFloat($("[name='rating']").val())
+                    }])
+                }).done(function (data) {
+                    var p = parseInt(data.pred);
+                    if (p == 0) {
+                        $("#result").html("<div class='alert alert-danger text-center' role='alert'>You <strong>will not</strong> like this beer!</div>");
+                    } else {
+                        $("#result").html("<div class='alert alert-success text-center' role='alert'>You <strong>will</strong> like this beer!</div>");
+                    }
+                });                
+            }
+        </script>
+    </body>
+</html>

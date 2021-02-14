@@ -1,0 +1,5 @@
+__pycache__/
+application/.ipynb_checkpoints/
+application/__pycache__/
+model/.ipynb_checkpoints/
+application/templates/.ipynb_checkpoints/
