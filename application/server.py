@@ -19,11 +19,17 @@ def index():
 @app.route("/predict", methods=["POST"])
 def predict():
     body = request.json
-    print(body)
+    print(">> body")
+    print(body);
     df = pd.DataFrame(body)
     model = load("../model/random_forest.joblib")
     pred = model.predict(df)
-    return json.dumps({'pred': list(pred)}, default=convert)
+    prob = model.predict_proba(df)
+    print("<< pred")
+    print(list(pred))
+    print("<< prob")
+    print(list(prob[0]))
+    return json.dumps({'pred': list(pred), 'prob': list(prob[0])}, default=convert)
 
 if __name__ == "__main_":
     app.run()

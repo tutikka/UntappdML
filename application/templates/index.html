@@ -103,11 +103,13 @@
                         global_average_rating: parseFloat($("[name='rating']").val())
                     }])
                 }).done(function (data) {
-                    var p = parseInt(data.pred);
-                    if (p == 0) {
-                        $("#result").html("<div class='alert alert-danger text-center' role='alert'>You <strong>will not</strong> like this beer!</div>");
+                    var pred = parseInt(data.pred);
+                    if (pred == 0) {
+                        var prob = parseFloat(data.prob[0]) * 100.0;
+                        $("#result").html("<div class='alert alert-danger text-center' role='alert'>With " + prob + "% confidence, you <strong>will not</strong> like this beer!</div>");
                     } else {
-                        $("#result").html("<div class='alert alert-success text-center' role='alert'>You <strong>will</strong> like this beer!</div>");
+                        var prob = parseFloat(data.prob[1]) * 100.0;
+                        $("#result").html("<div class='alert alert-success text-center' role='alert'>With " + prob + "% confidence, you <strong>will</strong> like this beer!</div>");
                     }
                 });                
             }
