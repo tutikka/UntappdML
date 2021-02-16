@@ -46,3 +46,9 @@ Forwarding                    https://ae19c1fcdf17.ngrok.io -> http://localhost:
 ```
 
 You can use either of these to access the UI from the Internet, for example using a tablet or mobile device.
+
+## Links
+
+- JupyterLab ( https://jupyter.org )
+- Flask ( https://palletsprojects.com/p/flask/ )
+- ngrok ( https://ngrok.com )
